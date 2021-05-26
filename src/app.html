@@ -1,0 +1,16 @@
+<template>
+  <require from="bootstrap/dist/css/bootstrap.min.css"></require>
+  <require from="@fortawesome/fontawesome-free/css/all.min.css"></require>
+  <require from="./styles.css"></require>
+
+
+  <!-- <div class="col-md-2">
+    <ul class="well nav nav-pills nav-stacked">
+      <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+        <a href.bind="row.href">${row.title}</a>
+      </li>
+    </ul>
+  </div> -->
+  <loading-indicator loading.bind="router.isNavigating || api.isRequesting"></loading-indicator>
+  <router-view></router-view>
+</template>
