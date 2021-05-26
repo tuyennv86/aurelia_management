@@ -1,4 +1,4 @@
-# `Ex1`
+# `Aurelia 1 Manage`
 
 This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
 
