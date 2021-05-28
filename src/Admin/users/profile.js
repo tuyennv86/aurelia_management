@@ -6,11 +6,15 @@ import { BootstrapFormRenderer } from '../../renderers/bootstrap-form-renderer';
 @inject(UserApi, ValidationControllerFactory)
 export class Profile
 {
-  // rules = ValidationRules
-  //   .ensure(a => a.password).required()
-  //   .ensure(a => a.passnew).required()
-  //   .ensure(a => a.passnewpre).required()
-  //   .rules;
+
+  rules = ValidationRules
+    .ensure('password').required().withMessage(`Mật khẩu cũ không được bỏ trống.`)
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/).withMessage(`Mật khẩu từ 8 - 20 ký tự gồm chữ hoa, chữ thường, số và ký tự đặc biệt.`)
+    .ensure('newPassword').required().withMessage(`Mật khẩu mới không được bỏ trống.`)
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/).withMessage(`Mật khẩu từ 8 - 20 ký tự gồm chữ hoa, chữ thường, số và ký tự đặc biệt.`)
+    .ensure('confirmPassword').required().withMessage(`Nhập lại mật khẩu mới không được bỏ trống.`)
+    .satisfiesRule('matchesProperty', 'newPassword').withMessage('Mật khẩu không trùng nhau')
+    .rules;
 
   constructor(userApi, controllerFactory)
   {
@@ -31,14 +35,18 @@ export class Profile
       this.user = fetchedUser;
     });
   }
+
   changPass()
   {
-    this.controller.validate();
+    this.controller.validate().then(result =>
+    {
+      if (result.valid)
+      {
+        console.log('jghjgh');
+      }
+    });
   }
-  updateInfo()
-  {
-    this.controller.validate();
-  }
+
 }
 ValidationRules.customRule(
   'matchesProperty',
@@ -53,12 +61,3 @@ ValidationRules.customRule(
   '${$displayName} must match ${$getDisplayName($config.otherPropertyName)}',
   otherPropertyName => ({ otherPropertyName })
 );
-
-ValidationRules
-  .ensure(a => a.password).required().withMessage(`Mật khẩu cũ không được bỏ trống.`)
-  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/).withMessage(`Mật khẩu từ 8 - 20 ký tự gồm chữ hoa, chữ thường, số và ký tự đặc biệt.`)
-  .ensure(b => b.passnew).required().withMessage(`Mật khẩu mới không được bỏ trống.`)
-  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/).withMessage(`Mật khẩu từ 8 - 20 ký tự gồm chữ hoa, chữ thường, số và ký tự đặc biệt.`)
-  .ensure(c => c.passnewpre).required().withMessage(`Nhập lại mật khẩu mới không được bỏ trống.`)
-  .satisfiesRule('matchesProperty', 'passnew').withMessage('Mật khẩu không trùng nhau')
-  .on(Profile);

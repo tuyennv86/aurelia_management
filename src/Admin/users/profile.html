@@ -1,157 +1,117 @@
 <template>
   <require from="./profile.css"></require>
+  <<require from="./edit-profile">
+    </require>
 
-  <div class="container emp-profile">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-            alt="" />
-          <div class="file btn btn-lg btn-primary">
-            Change Photo
-            <input type="file" name="file" />
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="profile-head">
-          <h5>
-            ${user.fullname}
-          </h5>
-          <h6>
-            Quyền :
-          </h6>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                aria-selected="true">Thông tin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Mật khẩu</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <input type="button" class="profile-edit-btn" data-toggle="modal" data-target="#myModal" value="Edit Profile" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8 offset-md-4">
-        <div class="tab-content profile-tab" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>User Name</label>
-              </div>
-              <div class="col-md-6">
-                <p>${user.username}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Họ tên</label>
-              </div>
-              <div class="col-md-6">
-                <p>${user.fullname}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Email</label>
-              </div>
-              <div class="col-md-6">
-                <p>${user.email}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Điện thoại</label>
-              </div>
-              <div class="col-md-6">
-                <p>${user.phone}</p>
-              </div>
+    <div class="container emp-profile">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-img">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+              alt="" />
+            <div class="file btn btn-lg btn-primary">
+              Change Photo
+              <input type="file" name="file" />
             </div>
           </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <form submit.delegate="changPass()">
-              <div class="form-group row">
-                <label for="staticEmail" class="col-md-3 col-form-label">Mật khẩu cũ :</label>
-                <input type="password" class="form-control col-md-9" value.bind="password & validate"
-                  placeholder="Mật khẩu cũ">
-              </div>
-              <div class="form-group row">
-                <label for="inputPassword" class="col-md-3 col-form-label">Mật khẩu mới:</label>
-                <input type="password" class="form-control col-md-9" value.bind="passnew & validate"
-                  placeholder="Mật khẩu mới">
-              </div>
-              <div class="form-group row">
-                <label for="inputPassword" class="col-md-3 col-form-label">Nhập lại mật khẩu:</label>
-                <input type="password" class="form-control col-md-9" value.bind="passnewpre & validate"
-                  placeholder="Nhập lại mật khẩu mới">
-              </div>
-              <div class="form-group row">
-                <div class="offset-md-3">
-                  <button type="submit" class="btn btn-primary">Cập nhật</button>
+        </div>
+        <div class="col-md-6">
+          <div class="profile-head">
+            <h5>
+              ${user.fullname}
+            </h5>
+            <h6>
+              Quyền :
+            </h6>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                  aria-selected="true">Thông tin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                  aria-controls="profile" aria-selected="false">Mật khẩu</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <input type="button" class="profile-edit-btn" data-toggle="modal" data-target="#myModal"
+            value="Edit Profile" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 offset-md-4">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>User Name</label>
+                </div>
+                <div class="col-md-6">
+                  <p>${user.username}</p>
                 </div>
               </div>
-            </form>
-          </div>
-          <div class="modal fade" id="myModal" data-backdrop="static">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form submit.delegate="updateInfo()">
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">Cập nhật thông tin</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Họ tên</label>
+                </div>
+                <div class="col-md-6">
+                  <p>${user.fullname}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Email</label>
+                </div>
+                <div class="col-md-6">
+                  <p>${user.email}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Điện thoại</label>
+                </div>
+                <div class="col-md-6">
+                  <p>${user.phone}</p>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <form submit.delegate="changPass()">
+                <div class="form-group row">
+                  <label for="staticEmail" class="col-md-3 col-form-label">Mật khẩu cũ :</label>
+                  <input type="password" class="form-control col-md-9" value.bind="password & validate:rules"
+                    placeholder="Mật khẩu cũ">
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-md-3 col-form-label">Mật khẩu mới:</label>
+                  <input type="password" class="form-control col-md-9" value.bind="newPassword & validate:rules"
+                    placeholder="Mật khẩu mới">
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-md-3 col-form-label">Nhập lại mật khẩu:</label>
+                  <input type="password" class="form-control col-md-9" value.bind="confirmPassword & validate:rules"
+                    placeholder="Nhập lại mật khẩu mới">
+                </div>
+                <div class="form-group row">
+                  <div class="offset-md-3">
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
                   </div>
-
-                  <!-- Modal body -->
-                  <div class="modal-body">
-
-                    <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">UserName</label>
-                      <div class="col-sm-9">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                          value="email@example.com">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputPassword" class="col-sm-3 col-form-label">Họ tên :</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputPassword" placeholder="Họ tên">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputPassword" class="col-sm-3 col-form-label">Email :</label>
-                      <div class="col-sm-9">
-                        <input type="email" class="form-control" id="inputPassword" placeholder="Email">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputPassword" class="col-sm-3 col-form-label">Điện thoại :</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputPassword" placeholder="Điện thoại">
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <!-- Modal footer -->
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Cập nhật</button>
-                  </div>
-                </form>
+                </div>
+              </form>
+            </div>
+            <div class="modal fade" id="myModal" data-backdrop="static">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <edit-profile user.bind="user"></edit-profile>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </div>
+    </div>
 </template>

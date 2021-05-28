@@ -6,6 +6,7 @@ export function configure(aurelia)
     .standardConfiguration()
     .feature('resources')
     .plugin("aurelia-validation")
+    .plugin("aurelia-dialog")
     .plugin("aurelia-validatejs");
 
   aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');

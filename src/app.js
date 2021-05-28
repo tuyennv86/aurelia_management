@@ -29,7 +29,6 @@ export class App
     config.options.root = '/';
 
     let step = new AuthorizeStep(this.authService);
-
     config.addAuthorizeStep(step);
 
     config.map([
@@ -37,7 +36,7 @@ export class App
       { route: 'users', name: 'users', moduleId: './users', nav: true, title: 'Github Users' },
       { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title: 'Child Router' },
       { route: 'login', name: 'login', moduleId: './Admin/login/login', nav: true, title: 'Đang nhập hệ thống', layoutViewModel: './layout/login-layout' },
-      { route: 'admin', name: 'admin', moduleId: './Admin/admin', nav: true, title: 'Admin cms' }
+      { route: 'admin', name: 'admin', moduleId: './Admin/admin', nav: true, settings: { auth: true }, title: 'Admin cms' }
 
     ]);
 

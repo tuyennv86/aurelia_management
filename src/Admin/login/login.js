@@ -1,21 +1,35 @@
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { ValidationControllerFactory, ValidationRules } from 'aurelia-validation';
 import { BootstrapFormRenderer } from '../../renderers/bootstrap-form-renderer';
 import { AuthService } from '../../services/auth-service';
 
-@inject(ValidationControllerFactory, Router, AuthService)
+@inject(ValidationControllerFactory, Router, AuthService, EventAggregator)
 export class Login
 {
+  errorMessage = '';
 
-  constructor(controllerFactory, router, authService)
+  constructor(controllerFactory, router, authService, eventAggregator)
   {
     this.controller = controllerFactory.createForCurrentScope();
     this.controller.addRenderer(new BootstrapFormRenderer());
     this.router = router;
     this.authService = authService;
+    this.eventAggregator = eventAggregator;
+
+
+    this.messageErr = this.eventAggregator.subscribe('messageErr', s =>
+    {
+      this.errorMessage = s.messageErr;
+    });
+
   }
 
+  deactivate()
+  {
+    this.messageErr.dispose();
+  }
 
   signin()
   {

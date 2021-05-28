@@ -11,7 +11,6 @@ export class UserApi
 
   getUser(username)
   {
-    //debugger;
     return this.http.fetch('auth/getuser?username=' + username)
       .then(response => response.json())
       .then(user =>
@@ -20,7 +19,7 @@ export class UserApi
       })
       .catch(error =>
       {
-        console.log('Error retrieving books.');
+        console.log('Error retrieving users.');
       });
 
   }
@@ -38,6 +37,22 @@ export class UserApi
         console.log('Error retrieving users.');
       });
 
+  }
+  updateInfo(user)
+  {
+    return this.http.fetch('auth/update/', {
+      method: 'post',
+      body: json(user)
+    })
+      .then(response => response.json())
+      .then(createdUser =>
+      {
+        return createdUser;
+      })
+      .catch(error =>
+      {
+        console.log('Error update info user');
+      });
   }
 
   addUser(user)
