@@ -26,7 +26,7 @@ export class ListUser
   activate(params)
   {
     this.currentPage = parseInt(params.page || '1');
-    console.log(this.currentPage + " day la page");
+    //console.log(this.currentPage + " day la page");
     this.userApi.getListUser(this.currentPage, this.limit).then(dataUser =>
     {
       this.data = dataUser.data;
