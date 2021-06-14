@@ -1,9 +1,10 @@
-import { bindable, inject, computedFrom, NewInstance } from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { UserApi } from '../../services/user-api'
 import { ValidationControllerFactory, ValidationRules } from 'aurelia-validation';
 import { BootstrapFormRenderer } from '../../renderers/bootstrap-form-renderer';
 
-@inject(UserApi, ValidationControllerFactory)
+@inject(UserApi, ValidationControllerFactory, EventAggregator)
 
 export class EditProfile
 {
@@ -17,11 +18,12 @@ export class EditProfile
     .ensure('phone').required().withMessage('Điện thoại không được bỏ trống')
     .rules;
 
-  constructor(userApi, controllerFactory)
+  constructor(userApi, controllerFactory, eventAggregator)
   {
     this.controller = controllerFactory.createForCurrentScope();
     this.controller.addRenderer(new BootstrapFormRenderer());
     this.userApi = userApi;
+    this.eventAggregator = eventAggregator;
   }
 
   updateInfo()
@@ -35,7 +37,7 @@ export class EditProfile
 
           this.message = 'Cập nhật thành công !';
           this.user = fetchedUser;
-          this.eventAggregator.publish('userInfo', { user: fetchedUser });
+          this.eventAggregator.publish('userInfo', { userInfo: fetchedUser });
         });
 
       }

@@ -32,17 +32,12 @@ export class App
     config.addAuthorizeStep(step);
 
     config.map([
-      { route: ['', 'welcome'], name: 'welcome', moduleId: './welcome', nav: true, settings: { auth: true }, title: 'Welcome' },
-      { route: 'users', name: 'users', moduleId: './users', nav: true, title: 'Github Users' },
-      { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title: 'Child Router' },
-      { route: 'login', name: 'login', moduleId: './Admin/login/login', nav: true, title: 'Đang nhập hệ thống', layoutViewModel: './layout/login-layout' },
-      { route: 'admin', name: 'admin', moduleId: './Admin/admin', nav: true, settings: { auth: true }, title: 'Admin cms' }
+      { route: ['', 'welcome'], name: 'welcome', moduleId: './welcome', settings: { auth: true }, title: 'Welcome' },
+      { route: 'users', name: 'users', moduleId: './users', title: 'Github Users' },
+      { route: 'child-router', name: 'child-router', moduleId: './child-router', title: 'Child Router' },
+      { route: 'login', name: 'login', moduleId: './Admin/login/login', title: 'Đang nhập hệ thống', layoutViewModel: './layout/login-layout' },
+      { route: 'admin', name: 'admin', moduleId: './Admin/admin', settings: { auth: true }, title: 'Admin cms' }
 
     ]);
-
-
-
   }
-
-
 }

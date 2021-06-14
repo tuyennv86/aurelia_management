@@ -8,6 +8,20 @@ export class UserApi
   {
     this.http = http;
   }
+  getListUser(pageIndex, limit)
+  {
+    return this.http.fetch('auth/list?page=' + pageIndex + '&limit=' + limit)
+      .then(response => response.json())
+      .then(dataUser =>
+      {
+        return dataUser;
+      })
+      .catch(error =>
+      {
+        console.log(error);
+      });
+
+  }
 
   getUser(username)
   {
@@ -38,6 +52,23 @@ export class UserApi
       });
 
   }
+  changPass(userchang)
+  {
+    return this.http.fetch('auth/changpass', {
+      method: 'post',
+      body: json(userchang)
+    })
+      .then(response => response.json())
+      .then(createdUser =>
+      {
+        return createdUser;
+      })
+      .catch(error =>
+      {
+        return error;
+      });
+  }
+
   updateInfo(user)
   {
     return this.http.fetch('auth/update/', {
@@ -53,6 +84,24 @@ export class UserApi
       {
         console.log('Error update info user');
       });
+  }
+
+  updateImageProfile(id, image)
+  {
+
+    let formData = new FormData();
+    formData.append('file', image)
+
+    return this.http.fetch(`auth/${id}/avatar`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data =>
+      {
+        return data;
+      })
+      .catch(error => console.log(error));
   }
 
   addUser(user)

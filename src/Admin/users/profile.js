@@ -1,9 +1,10 @@
 import { inject } from 'aurelia-framework';
 import { UserApi } from '../../services/user-api'
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { ValidationControllerFactory, ValidationRules } from 'aurelia-validation';
 import { BootstrapFormRenderer } from '../../renderers/bootstrap-form-renderer';
 
-@inject(UserApi, ValidationControllerFactory)
+@inject(UserApi, ValidationControllerFactory, EventAggregator)
 export class Profile
 {
 
@@ -16,11 +17,20 @@ export class Profile
     .satisfiesRule('matchesProperty', 'newPassword').withMessage('Mật khẩu không trùng nhau')
     .rules;
 
-  constructor(userApi, controllerFactory)
+  constructor(userApi, controllerFactory, eventAggregator)
   {
+    this.messageSucc = '';
+    this.messageErr = '';
     this.controller = controllerFactory.createForCurrentScope();
     this.controller.addRenderer(new BootstrapFormRenderer());
     this.userApi = userApi;
+    this.eventAggregator = eventAggregator;
+
+    this.messageInfo = this.eventAggregator.subscribe('userInfo', s =>
+    {
+      this.user = s.userInfo;
+    });
+
   }
 
   activate(params, routeConfig)
@@ -42,9 +52,39 @@ export class Profile
     {
       if (result.valid)
       {
-        console.log('jghjgh');
+        const userchang = {
+          username: this.user.username,
+          password: this.password,
+          newPassword: this.newPassword,
+          confirmPassword: this.confirmPassword
+        }
+
+        this.userApi.changPass(userchang).then(fetchedUser =>
+        {
+          console.log(fetchedUser);
+          // this.user = fetchedUser;
+          if (fetchedUser.statusCode === 409)
+          {
+            this.messageErr = fetchedUser.message;
+            this.messageSucc = '';
+          } else
+          {
+            this.messageErr = '';
+            this.messageSucc = "Cập nhật thành công!";
+          }
+        })
+        // console.log('jghjgh');
       }
     });
+  }
+
+  fileSelected()
+  {
+    this.userApi.updateImageProfile(this.user.id, this.files[0]).then(fetchUser =>
+    {
+      this.user = fetchUser;
+    });
+
   }
 
 }

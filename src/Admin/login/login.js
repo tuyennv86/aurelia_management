@@ -8,7 +8,6 @@ import { AuthService } from '../../services/auth-service';
 @inject(ValidationControllerFactory, Router, AuthService, EventAggregator)
 export class Login
 {
-  errorMessage = '';
 
   constructor(controllerFactory, router, authService, eventAggregator)
   {

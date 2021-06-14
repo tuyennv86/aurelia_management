@@ -1,0 +1,63 @@
+<template>
+  <require from="../../share/pagination">
+  </require>
+  <div class="container-fluid">
+    <h1 class="mt-4">Danh sách Users</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a route-href="route: dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active">Users</li>
+    </ol>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Danh sách user name
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Họ tên</th>
+                <th>Ảnh</th>
+                <th>User</th>
+                <th>Điện thoại</th>
+                <th>Email</th>
+                <th>Quyền</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Họ tên</th>
+                <th>Ảnh</th>
+                <th>User</th>
+                <th>Điện thoại</th>
+                <th>Email</th>
+                <th>Quyền</th>
+                <th></th>
+              </tr>
+            </tfoot>
+            <tbody>
+
+              <tr repeat.for="item of data">
+                <td>${item.fullname}</td>
+                <td><img class="mr-2" src.bind="item.imageUrl" width="40" height="40" alt="${item.fullname}">
+                </td>
+                <td>${item.username}</td>
+                <td>${item.phone}</td>
+                <td><a href="mailto:${item.email}">${item.email}</a></td>
+                <td>quyền</td>
+                <td></td>
+              </tr>
+
+            </tbody>
+          </table>
+          <pagination current.bind="currentPage" pages.bind="totalPage" routerlink.bind="linkrouter">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

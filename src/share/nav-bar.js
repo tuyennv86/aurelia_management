@@ -17,7 +17,7 @@ export class NavBar
 
     this.messageInfo = this.eventAggregator.subscribe('userInfo', s =>
     {
-      this.user = s.user;
+      this.user = s.userInfo;
     });
   }
 
@@ -31,7 +31,7 @@ export class NavBar
     this.username = this.authService.getUser();
     this.userApi.getUser(this.username).then(fetchedUser =>
     {
-      if (fetchedUser.statusCode == 401) // check xem server còn phiên của token không nếu hết thì thoát ra và đưa thông báo hết phiên server
+      if (fetchedUser.statusCode === 401) // check xem server còn phiên của token không nếu hết thì thoát ra và đưa thông báo hết phiên server
       {
         this.eventAggregator.publish('messageErr', { messageErr: 'Phiên làm việc của bạn đã hết hãy đăng nhập lại' });
         this.authService.logOut();
