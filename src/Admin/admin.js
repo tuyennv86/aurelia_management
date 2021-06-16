@@ -13,6 +13,9 @@ export class Admin
         route: 'users/:page?', name: 'users', moduleId: './users/list-user', title: 'Danh sách user name', layoutViewModel: './layout/main-layout'
       },
       {
+        route: 'users/edit/:id', name: 'editusers', moduleId: './users/edit-user', title: 'Sửa user name', layoutViewModel: './layout/main-layout'
+      },
+      {
         route: 'profile/:username', name: 'profile', moduleId: './users/profile', title: 'Profile user', layoutViewModel: './layout/main-layout'
       }
     ]);

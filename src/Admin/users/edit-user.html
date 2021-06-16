@@ -1,0 +1,50 @@
+<template>
+  <div class="container-fluid">
+    <h1 class="mt-4">Users</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a route-href="route: dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item"> <a route-href="route: users">Danh sách Users</a></li>
+      <li class="breadcrumb-item active">Cập nhật User</li>
+    </ol>
+
+    <div class="card mb-4">
+      <div class="container offset-sm-1 mt-3">
+
+        <form>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">User name :</label>
+            ${user.username}
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">Họ tên :</label>
+            <input type="text" class="form-control col-sm-9" placeholder="Họ tên" value.bind="user.fullname">
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">Email :</label>
+            <input type="text" class="form-control col-sm-9" placeholder="Email" value.bind="user.email">
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">Ảnh :</label>
+            <div class="col-sm-9">
+              <img show.bind="user.imageUrl.length > 0" src.bind="user.imageUrl" class="img-thumbnail"
+                style="max-width: 200px;" alt="${user.fullname}">
+              <input type="file" name="file" accept="image/*" files.bind="files">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">Điện thoại :</label>
+            <input type="text" class="form-control col-sm-9" placeholder="Điện thoại" value.bind="user.phone">
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-3">
+              <button type="submit" class="btn btn-primary">Cập nhật</button>
+              <button type="button" class="btn btn-secondary">Hủy bỏ</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</template>

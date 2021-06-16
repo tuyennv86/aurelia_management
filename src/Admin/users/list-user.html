@@ -49,8 +49,9 @@
                 <td>${item.phone}</td>
                 <td><a href="mailto:${item.email}">${item.email}</a></td>
                 <td>quyền</td>
-                <td><button class="btn" title="Sửa thông tin user"><i class="fas fa-edit"></i></button>
-                  <button class="btn" title="xóa user" click.delegate="delete(item.id)"><i
+                <td><a route-href="route: editusers; params.bind: {id: item.id}" class="btn"
+                    title="Sửa thông tin user"><i class="fas fa-edit"></i></a>
+                  <button class="btn" title="xóa user" click.delegate="removeUser(item)"><i
                       class="fas fa-trash-alt"></i></button>
                   <button class="btn" title="Chỉnh sửa quyền"><i class="fas fa-user-edit"></i></button>
                 </td>

@@ -33,7 +33,7 @@ export class Profile
 
   }
 
-  activate(params, routeConfig)
+  activate(params)
   {
     this.loadUser(params.username);
   }

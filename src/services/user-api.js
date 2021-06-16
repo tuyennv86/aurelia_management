@@ -38,6 +38,21 @@ export class UserApi
 
   }
 
+  getUserById(id)
+  {
+    return this.http.fetch(`auth/user/${id}`)
+      .then(response => response.json())
+      .then(user =>
+      {
+        return user;
+      })
+      .catch(error =>
+      {
+        console.log('Error retrieving users.');
+      });
+
+  }
+
   getUsers()
   {
     return this.http.fetch('auth')
@@ -123,7 +138,7 @@ export class UserApi
 
   deleteUser(user)
   {
-    return this.http.fetch(`auth/${user.name}`, {
+    return this.http.fetch(`auth/${user.id}`, {
       method: 'delete'
     })
       .then(response => response.json())
@@ -133,7 +148,7 @@ export class UserApi
       })
       .catch(error =>
       {
-        console.log('Error deleting book');
+        console.log('Error deleting user');
       });
   }
 

@@ -17,7 +17,6 @@ export class Login
     this.authService = authService;
     this.eventAggregator = eventAggregator;
 
-
     this.messageErr = this.eventAggregator.subscribe('messageErr', s =>
     {
       this.errorMessage = s.messageErr;
