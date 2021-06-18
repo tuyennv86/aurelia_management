@@ -136,6 +136,31 @@ export class UserApi
       });
   }
 
+  addUserImg(user, image)
+  {
+    let formData = new FormData();
+    formData.append('file', image);
+    formData.append("fullname", user.fullname);
+    formData.append("email", user.email);
+    formData.append("phone", user.phone);
+    formData.append("password", user.password);
+    formData.append("username", user.username);
+
+    return this.http.fetch('auth/signup', {
+      method: 'post',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(createdUser =>
+      {
+        return createdUser;
+      })
+      .catch(error =>
+      {
+        console.log('Error adding user');
+      });
+  }
+
   deleteUser(user)
   {
     return this.http.fetch(`auth/${user.id}`, {
@@ -152,20 +177,42 @@ export class UserApi
       });
   }
 
-  saveUser(user)
+  saveUser(user, image)
   {
-    return this.http.fetch(`auth/${user.name}`, {
+    let formData = new FormData();
+    formData.append('file', image);
+    formData.append("fullname", user.fullname);
+    formData.append("email", user.email);
+    formData.append("phone", user.phone);
+
+    return this.http.fetch(`auth/${user.id}`, {
       method: 'put',
-      body: json(user)
-    })
-      .then(response => response.json())
+      body: formData
+    }).then(response => response.json())
       .then(savedUser =>
       {
         return savedUser;
       })
       .catch(error =>
       {
-        console.log('Error saving book');
+        return error;
+      });
+  }
+
+  saveUserNoImage(user)
+  {
+
+    return this.http.fetch(`auth/NoImage/${user.id}`, {
+      method: 'put',
+      body: json(user)
+    }).then(response => response.json())
+      .then(savedUser =>
+      {
+        return savedUser;
+      })
+      .catch(error =>
+      {
+        return error;
       });
   }
 }

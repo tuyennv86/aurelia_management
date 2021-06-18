@@ -9,26 +9,31 @@
     <ol class="breadcrumb mb-4">
       <li class="breadcrumb-item"><a route-href="route: dashboard">Dashboard</a></li>
       <li class="breadcrumb-item"> <a route-href="route: users">Danh sách Users</a></li>
-      <li class="breadcrumb-item active">Cập nhật User</li>
+      <li class="breadcrumb-item active">Thêm mới User</li>
     </ol>
 
     <div class="card mb-4">
       <div class="container offset-sm-1 mt-3">
-        <form submit.delegate="updateuser()">
+        <form submit.delegate="submit()">
           <div class="form-group row offset-sm-3">
             <div class="col-sm-12 alert alert-dismissible alert-success" show.bind="message.length > 0">
               ${message}
             </div>
           </div>
-
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right">User name :</label>
-            ${user.username}
-          </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label text-right">Họ tên :</label>
             <input type="text" class="form-control col-sm-9" placeholder="Họ tên"
               value.bind="user.fullname & validate:rules">
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">User name :</label>
+            <input type="text" class="form-control col-sm-9" placeholder="User name"
+              value.bind="user.username & validate:rules">
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right">Mật khẩu :</label>
+            <input type="password" class="form-control col-sm-9" placeholder="Mật khẩu"
+              value.bind="user.password & validate:rules">
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label text-right">Email :</label>
@@ -38,11 +43,7 @@
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label text-right">Ảnh :</label>
-            <div class="col-sm-9">
-              <img show.bind="user.imageUrl.length > 0" src.bind="user.imageUrl" class="img-thumbnail"
-                style="max-width: 200px;" alt="${user.fullname}">
-              <input type="file" name="file" accept="image/*" files.bind="files">
-            </div>
+            <input class="form-control col-sm-9" type="file" name="file" accept="image/*" files.bind="files">
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label text-right">Điện thoại :</label>

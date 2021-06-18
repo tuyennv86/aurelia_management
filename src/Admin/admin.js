@@ -16,6 +16,9 @@ export class Admin
         route: 'users/edit/:id', name: 'editusers', moduleId: './users/edit-user', title: 'Sửa user name', layoutViewModel: './layout/main-layout'
       },
       {
+        route: 'users/add', name: 'adduser', moduleId: './users/add-user', title: 'Thêm mới user name', layoutViewModel: './layout/main-layout'
+      },
+      {
         route: 'profile/:username', name: 'profile', moduleId: './users/profile', title: 'Profile user', layoutViewModel: './layout/main-layout'
       }
     ]);
